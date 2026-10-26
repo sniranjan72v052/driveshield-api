@@ -4,12 +4,12 @@ WORKDIR /app
 
 # 2. Copy the solution file and restore project dependencies
 COPY *.sln ./
-COPY src/driveshieldapi/*.csproj ./src/driveshieldapi/
+COPY src/Driveshield.Api/*.csproj ./src/Driveshield.Api/
 RUN dotnet restore
 
 # 3. Copy the rest of the source files and build the release package
 COPY src/ ./src/
-WORKDIR /app/src/driveshieldapi
+WORKDIR /app/src/Driveshield.api
 RUN dotnet publish -c Release -o /app/out
 
 # 4. Build the final runtime image using a lightweight runtime environment
@@ -21,4 +21,4 @@ COPY --from=build-env /app/out .
 ENV ASPNETCORE_URLS=http://+:8080
 EXPOSE 8080
 
-ENTRYPOINT ["dotnet", "driveshieldapi.dll"]
+ENTRYPOINT ["dotnet", "Driveshield.Api.dll"]

@@ -14,6 +14,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 // Your own settings (for example the admin email) go in appsettings.Local.json. It is never part of an update, so replacing
@@ -43,7 +44,24 @@ builder.Services.ConfigureHttpJsonOptions(o => o.SerializerOptions.Converters.Ad
 builder.Services.AddSignalR()
     .AddJsonProtocol(o => o.PayloadSerializerOptions.Converters.Add(new JsonStringEnumConverter()));
 
-builder.Services.AddOpenApi();
+// The API description (/openapi/v1.json) with a "Bearer" sign-in scheme, so Swagger UI gets an Authorize button.
+builder.Services.AddOpenApi(options => options.AddDocumentTransformer((document, _, _) =>
+{
+    document.Info.Title = "DriveShield API";
+    document.Components ??= new OpenApiComponents();
+    document.Components.SecuritySchemes["Bearer"] = new OpenApiSecurityScheme
+    {
+        Type = SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT",
+        Description = "Paste the accessToken from POST /api/auth/otp/verify. No \"Bearer \" prefix."
+    };
+    document.SecurityRequirements.Add(new OpenApiSecurityRequirement
+    {
+        [new OpenApiSecurityScheme { Reference = new OpenApiReference { Type = ReferenceType.SecurityScheme, Id = "Bearer" } }] = []
+    });
+    return Task.CompletedTask;
+}));
 
 // ---------------------------------------------------------------- sign-in: one-time codes by email or SMS
 builder.Services.Configure<JwtOptions>(config.GetSection("Auth:Jwt"));
@@ -168,6 +186,13 @@ app.UseAuthorization();
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
+    // Swagger UI at /swagger. Development only: production exposes neither this page nor the API description.
+    app.UseSwaggerUI(o =>
+    {
+        o.SwaggerEndpoint("/openapi/v1.json", "DriveShield API v1");
+        o.RoutePrefix = "swagger";
+        o.EnablePersistAuthorization(); // keeps the pasted token when the page is reloaded
+    });
     await DevSetup.InitializeAsync(app.Services, config);
 }
 

@@ -255,3 +255,11 @@ Admin rights are checked on every request against `Auth:AdminEmails`, so after e
 you only need to reload the web page (no sign-out needed). The API log says "Admin emails configured: N" at startup.
 Admin is matched on the verified **email**: a mobile-number-only sign-in is never an admin until an email is added under
 Your account. The Your account page shows which email you are signed in with and your account type.
+
+## Swagger (Development only)
+
+Run the API and open `/swagger` (for example `https://localhost:44387/swagger`; Visual Studio opens it for you).
+To call protected endpoints: `POST /api/auth/otp/start`, then `POST /api/auth/otp/verify` with the code (shown in the
+reply as `devCode` and in the API console), copy the `accessToken`, press **Authorize** and paste it. The token lasts
+15 minutes; use `POST /api/auth/refresh` for a new one. The raw description is at `/openapi/v1.json`.
+Swagger and the description are not exposed outside Development.

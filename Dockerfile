@@ -13,7 +13,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:9.0 as runtime
 WORKDIR /app
 COPY --from=build-env /app/out .
 
-ENV ASPNETCORE_URLS=http://+:8080
-EXPOSE 8080
+ENV ASPNETCORE_URLS=http://+:5000
+EXPOSE 5000
 
 ENTRYPOINT ["dotnet", "DriveShield.Api.dll"]

@@ -46,7 +46,7 @@ builder.Services.AddSignalR()
 builder.Services.AddOpenApi();
 
 // ---------------------------------------------------------------- sign-in: one-time codes by email or SMS
-builder.Services.Configure<JwtOptions>(config.GetSection("Auth:Jwt"));
+//builder.Services.Configure<JwtOptions>(config.GetSection("Auth:Jwt"));
 builder.Services.Configure<OtpOptions>(config.GetSection("Auth:Otp"));
 builder.Services.Configure<AccountOptions>(config.GetSection("Auth"));
 builder.Services.Configure<SmtpOptions>(config.GetSection("Email:Smtp"));

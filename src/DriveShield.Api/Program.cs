@@ -178,7 +178,7 @@ app.Use(async (ctx, next) =>
     catch (UnauthorizedAccessException) when (!ctx.Response.HasStarted) { ctx.Response.StatusCode = StatusCodes.Status401Unauthorized; }
 });
 
-app.UseCors();
+app.UseCors("AllowAll");
 app.UseRateLimiter();
 app.UseAuthentication();
 app.UseAuthorization();

@@ -1,4 +1,4 @@
-FROM ://microsoft.com AS build-env
+FROM mcr.microsoft.com AS build-env /dotnet/sdk:9.0
 WORKDIR /app
 
 COPY *.sln ./
@@ -9,7 +9,7 @@ COPY src/ ./src/
 WORKDIR /app/src/DriveShield.Api
 RUN dotnet publish -c Release -o /app/out
 
-FROM ://microsoft.com
+FROM mcr.microsoft.com /dotnet/aspnet:9.0
 WORKDIR /app
 COPY --from=build-env /app/out .
 

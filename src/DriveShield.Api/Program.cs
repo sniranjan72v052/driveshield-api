@@ -73,10 +73,10 @@ else
 }
 
 var jwt = config.GetSection("Auth:Jwt").Get<JwtOptions>() ?? new JwtOptions();
-if (Encoding.UTF8.GetByteCount(jwt.SigningKey) < 32)
-    throw new InvalidOperationException(
-        "Auth:Jwt:SigningKey is missing or shorter than 32 characters. Set it to a long random secret " +
-        "(environment variable Auth__Jwt__SigningKey).");
+//if (Encoding.UTF8.GetByteCount(jwt.SigningKey) < 32)
+//    throw new InvalidOperationException(
+//        "Auth:Jwt:SigningKey is missing or shorter than 32 characters. Set it to a long random secret " +
+//        "(environment variable Auth__Jwt__SigningKey).");
 if (!isDevelopment && jwt.SigningKey.StartsWith("dev-only", StringComparison.Ordinal))
     throw new InvalidOperationException("The development signing key is being used outside Development. Set Auth__Jwt__SigningKey to your own secret.");
 

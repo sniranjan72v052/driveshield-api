@@ -183,8 +183,8 @@ app.UseRateLimiter();
 app.UseAuthentication();
 app.UseAuthorization();
 
-if (app.Environment.IsDevelopment())
-{
+//if (app.Environment.IsDevelopment())
+//{
     app.MapOpenApi();
     // Swagger UI at /swagger. Development only: production exposes neither this page nor the API description.
     app.UseSwaggerUI(o =>
@@ -194,7 +194,7 @@ if (app.Environment.IsDevelopment())
         o.EnablePersistAuthorization(); // keeps the pasted token when the page is reloaded
     });
     await DevSetup.InitializeAsync(app.Services, config);
-}
+//}
 
 app.MapGet("/healthz", () => Results.Ok(new { status = "ok" }));
 app.MapAuthEndpoints();

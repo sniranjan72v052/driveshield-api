@@ -164,10 +164,10 @@ builder.Services.AddRateLimiter(o =>
 // ---------------------------------------------------------------- CORS for the React web app
 var origins = config.GetSection("Cors:Origins").Get<string[]>() ?? [];
 builder.Services.AddCors(o => o.AddDefaultPolicy(p => p
-    .AllowAnyOrigin()
-    .AllowAnyHeader()
-    .AllowAnyMethod()
-    .AllowCredentials()));
+     .AllowAnyOrigin()
+ .AllowAnyHeader()
+ .AllowAnyMethod()
+ ));
 
 var app = builder.Build();
 

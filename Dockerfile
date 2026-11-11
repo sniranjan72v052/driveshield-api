@@ -1,5 +1,5 @@
 # 1. Use the official .NET SDK image to build the application
-FROM ://microsoft.com AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build-env
 WORKDIR /app
 
 # 2. Copy the solution file and restore project dependencies
@@ -13,7 +13,7 @@ WORKDIR /app/src/DriveShield.Api
 RUN dotnet publish -c Release -o /app/out
 
 # 4. Build the final runtime image using a lightweight runtime environment
-FROM ://microsoft.com
+FROM mcr.microsoft.com/dotnet/aspnet:9.0
 WORKDIR /app
 COPY --from=build-env /app/out .
 

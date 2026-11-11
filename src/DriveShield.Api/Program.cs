@@ -218,7 +218,7 @@ if (!isDevelopment)
         o.RoutePrefix = "swagger";
         o.EnablePersistAuthorization(); // keeps the pasted token when the page is reloaded
     });
-    await DevSetup.InitializeAsync(app.Services, config);
+    //await DevSetup.InitializeAsync(app.Services, config);
 }
 
 app.MapGet("/healthz", () => Results.Ok(new { status = "ok" }));

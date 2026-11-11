@@ -1,0 +1,5 @@
+{
+  "Auth": {
+    "AdminEmails": [ "you@example.com" ]
+  }
+}

@@ -203,6 +203,7 @@ app.Use(async (ctx, next) =>
     catch (UnauthorizedAccessException) when (!ctx.Response.HasStarted) { ctx.Response.StatusCode = StatusCodes.Status401Unauthorized; }
 });
 
+app.UseExceptionHandler(a => a.Run(c => { c.Response.StatusCode = 500; return c.Response.WriteAsJsonAsync(new { error = "Server error" }); }));
 app.UseCors();
 app.UseRateLimiter();
 app.UseAuthentication();

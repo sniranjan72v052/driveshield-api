@@ -21,6 +21,9 @@ var builder = WebApplication.CreateBuilder(args);
 // the project files cannot reset it. It is read last, so it wins over appsettings.json and appsettings.Development.json.
 builder.Configuration.AddJsonFile("appsettings.Production.json", optional: true, reloadOnChange: true);
 var config = builder.Configuration;
+var cs = config.GetConnectionString("Default");
+if (string.IsNullOrWhiteSpace(cs))
+    throw new InvalidOperationException("ConnectionStrings:Default is not set. On Render set ConnectionStrings__Default.");
 var isDevelopment = builder.Environment.IsDevelopment();
 
 // ---------------------------------------------------------------- database (PostgreSQL + PostGIS)

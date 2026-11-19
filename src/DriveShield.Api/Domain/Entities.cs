@@ -15,8 +15,11 @@ public class AppUser
     /// <summary>Verified sign-in mobile number in E.164 form (for example +919876543210). Null until added.</summary>
     public string? LoginPhone { get; set; }
     public UserRole Role { get; set; } = UserRole.Customer;
+<<<<<<< HEAD
     /// <summary>True when a super admin made this person an admin in the app (as opposed to Auth:AdminEmails).</summary>
     public bool AdminGranted { get; set; }
+=======
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
     public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.UtcNow;
 }
 
@@ -27,6 +30,7 @@ public class ProviderProfile
     public AppUser User { get; set; } = null!;
     public string BusinessName { get; set; } = "";
     public string? Description { get; set; }
+<<<<<<< HEAD
     /// <summary>Licence number or GST number.</summary>
     public string? LicenseNumber { get; set; }
     public string? Address { get; set; }
@@ -43,6 +47,9 @@ public class ProviderProfile
     public decimal? PaintDiscount { get; set; }
     public decimal? PaintDiscountOem { get; set; }
     public string? ImdCode { get; set; }
+=======
+    public string? LicenseNumber { get; set; }
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
     /// <summary>Last known / base location (WGS84). X = longitude, Y = latitude.</summary>
     public Point? Location { get; set; }
     public int ServiceRadiusMeters { get; set; } = 15_000;

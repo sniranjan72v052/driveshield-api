@@ -37,7 +37,10 @@ public class LiveOtpSender(
     IOptions<SmtpOptions> smtp,
     IOptions<TwilioOptions> twilio,
     IOptions<OtpOptions> otpOpts,
+<<<<<<< HEAD
     IConfiguration config,
+=======
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
     IHttpClientFactory httpFactory,
     ILogger<LiveOtpSender> log) : IOtpSender
 {
@@ -49,6 +52,7 @@ public class LiveOtpSender(
     private async Task SendEmailAsync(string to, string code, int validMinutes, CancellationToken ct)
     {
         var o = smtp.Value;
+<<<<<<< HEAD
 
         // Hosts such as Render block outbound SMTP. With Email:Brevo:ApiKey set, mail goes over HTTPS instead.
         var brevoKey = config["Email:Brevo:ApiKey"];
@@ -58,6 +62,8 @@ public class LiveOtpSender(
             return;
         }
 
+=======
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
         if (string.IsNullOrWhiteSpace(o.Host) || string.IsNullOrWhiteSpace(o.FromAddress))
             throw new DeliveryNotConfiguredException("Email sending is not set up. Fill in Email:Smtp in the API settings.");
 
@@ -81,6 +87,7 @@ public class LiveOtpSender(
             };
             message.To.Add(new MailAddress(to));
 
+<<<<<<< HEAD
             // SmtpClient.Timeout is not honoured by SendMailAsync, so enforce the limit ourselves.
             using var limit = CancellationTokenSource.CreateLinkedTokenSource(ct);
             limit.CancelAfter(TimeSpan.FromSeconds(20));
@@ -90,6 +97,9 @@ public class LiveOtpSender(
         {
             log.LogError("SMTP timed out connecting to {Host}:{Port}. Many hosts block outbound SMTP; use Email:Brevo:ApiKey instead.", o.Host, o.Port);
             throw new DeliveryFailedException("The email service took too long to answer.", ex);
+=======
+            await client.SendMailAsync(message, ct);
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
         }
         catch (Exception ex) when (ex is SmtpException or FormatException or InvalidOperationException)
         {
@@ -98,6 +108,7 @@ public class LiveOtpSender(
         }
     }
 
+<<<<<<< HEAD
     private async Task SendBrevoAsync(string apiKey, string fromAddress, string fromName, string to, string code, int validMinutes, CancellationToken ct)
     {
         if (string.IsNullOrWhiteSpace(fromAddress))
@@ -133,6 +144,8 @@ public class LiveOtpSender(
         catch (OperationCanceledException ex) when (!ct.IsCancellationRequested) { throw new DeliveryFailedException("The email service took too long to answer.", ex); }
     }
 
+=======
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
     private async Task SendSmsAsync(string to, string code, int validMinutes, CancellationToken ct)
     {
         var o = twilio.Value;

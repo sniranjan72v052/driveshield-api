@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../auth";
 import { ALL_CATEGORIES, CATEGORY_LABEL, INCIDENTS } from "../api/labels";
+<<<<<<< HEAD
 import { isStaff } from "../api/types";
+=======
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
 import type { ServiceCategory } from "../api/types";
 import { CarGlyph, IncidentIcon, PinGlyph, ShieldTick, TickGlyph } from "../components/Icons";
 import SiteFooter from "../components/SiteFooter";
@@ -27,7 +30,11 @@ const SERVICE_TEXT: Record<ServiceCategory, string> = {
 export default function Home() {
   const { me } = useAuth();
   const signedIn = !!me;
+<<<<<<< HEAD
   const isAdmin = isStaff(me?.role);
+=======
+  const isAdmin = me?.role === "Admin";
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
   const firstName = me?.displayName?.trim().split(/\s+/)[0];
 
   // Where each button goes. Signed-out visitors sign in first and are sent on afterwards.

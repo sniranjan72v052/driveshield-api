@@ -20,11 +20,18 @@ public static class AdminEndpoints
         g.MapPost("/cases/{caseId:guid}/rematch", Rematch);
         g.MapGet("/photos", RecentPhotos);
         AdminDirectoryEndpoints.Map(g);
+<<<<<<< HEAD
         AdminAccountsEndpoints.Map(g);
     }
 
     private static async Task<bool> IsAdminAsync(HttpContext http, UserResolver users, CancellationToken ct) =>
         (await users.ResolveAsync(http.User, ct)).Role.IsStaff();
+=======
+    }
+
+    private static async Task<bool> IsAdminAsync(HttpContext http, UserResolver users, CancellationToken ct) =>
+        (await users.ResolveAsync(http.User, ct)).Role == UserRole.Admin;
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
 
     private static async Task<IResult> PendingProviders(HttpContext http, UserResolver users, AppDbContext db, CancellationToken ct)
     {
@@ -38,10 +45,13 @@ public static class AdminEndpoints
                 p.Id,
                 p.BusinessName,
                 p.LicenseNumber,
+<<<<<<< HEAD
                 p.Address, p.City, p.State, p.PinCode,
                 p.ManagerName, p.ManagerEmail,
                 p.PanNumber, p.BankAccountNumber, p.IfscCode,
                 p.TdsPercentage, p.Zone, p.PaintDiscount, p.PaintDiscountOem, p.ImdCode,
+=======
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
                 p.CreatedAt,
                 Phone = p.User.Phone,
                 Categories = p.Services.Select(s => s.Category).ToList()

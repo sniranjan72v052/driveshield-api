@@ -46,6 +46,7 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             e.Property(x => x.Location).HasColumnType("geography (point, 4326)");
             e.HasIndex(x => x.Location).HasMethod("gist");
             e.Property(x => x.ApprovalStatus).HasConversion<string>().HasMaxLength(20);
+<<<<<<< HEAD
             e.Property(x => x.PinCode).HasMaxLength(6);
             e.Property(x => x.PanNumber).HasMaxLength(10);
             e.Property(x => x.IfscCode).HasMaxLength(11);
@@ -53,6 +54,8 @@ public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(op
             e.Property(x => x.TdsPercentage).HasPrecision(5, 2);
             e.Property(x => x.PaintDiscount).HasPrecision(5, 2);
             e.Property(x => x.PaintDiscountOem).HasPrecision(5, 2);
+=======
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
         });
 
         b.Entity<ProviderService>(e =>

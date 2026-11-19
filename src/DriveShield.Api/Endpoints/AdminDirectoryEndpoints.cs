@@ -26,7 +26,11 @@ public static class AdminDirectoryEndpoints
     private static async Task<AppUser?> AdminAsync(HttpContext http, UserResolver users, CancellationToken ct)
     {
         var user = await users.ResolveAsync(http.User, ct);
+<<<<<<< HEAD
         return user.Role.IsStaff() ? user : null;
+=======
+        return user.Role == UserRole.Admin ? user : null;
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
     }
 
     /// <summary>Turns what someone typed into a case-insensitive "contains" pattern for ILIKE.</summary>

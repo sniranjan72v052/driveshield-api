@@ -1,6 +1,10 @@
 {
   "Auth": {
+<<<<<<< HEAD
     "SuperAdminEmails": [ "you@example.com" ],
     "AdminEmails": [ ]
+=======
+    "AdminEmails": [ "you@example.com" ]
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
   }
 }

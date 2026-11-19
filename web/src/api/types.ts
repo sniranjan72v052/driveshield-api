@@ -24,7 +24,11 @@ export type CaseStatus =
 export interface Me {
   id: string;
   displayName: string;
+<<<<<<< HEAD
   role: string; // "Customer" | "Provider" | "Admin" | "SuperAdmin"
+=======
+  role: string; // "Customer" | "Provider" | "Admin"
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
   providerId: string | null;
   /** The verified email used to sign in, if the person has one. */
   email: string | null;
@@ -196,6 +200,7 @@ export interface Job {
   createdAt: string;
 }
 
+<<<<<<< HEAD
 /** Business details a provider can give. Every field is optional. */
 export interface ProviderDetails {
   licenseNumber: string | null; // licence or GST number
@@ -216,6 +221,9 @@ export interface ProviderDetails {
 }
 
 export interface PendingProvider extends Partial<Omit<ProviderDetails, "licenseNumber">> {
+=======
+export interface PendingProvider {
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
   id: string;
   businessName: string;
   licenseNumber: string | null;
@@ -323,6 +331,7 @@ export interface AdminCandidate {
   categories: ServiceCategory[];
   assigned: boolean;
 }
+<<<<<<< HEAD
 
 /** Admins and super admins both use the admin area. */
 export const isStaff = (role?: string | null) => role === "Admin" || role === "SuperAdmin";
@@ -336,3 +345,5 @@ export interface AdminAccount {
   source: string;
   removable: boolean;
 }
+=======
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3

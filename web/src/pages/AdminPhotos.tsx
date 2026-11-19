@@ -1,7 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { api, messageOf } from "../api/client";
+<<<<<<< HEAD
 import { isStaff } from "../api/types";
+=======
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
 import type { AdminPhoto, AdminPhotoPage } from "../api/types";
 import { INCIDENT_LABEL, STATUS_LABEL, formatTime } from "../api/labels";
 import { useAuth } from "../auth";
@@ -38,7 +41,11 @@ export default function AdminPhotos() {
   }, [load]);
 
   useEffect(() => {
+<<<<<<< HEAD
     if (isStaff(me?.role)) void first();
+=======
+    if (me?.role === "Admin") void first();
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
   }, [me?.role, first]);
 
   const more = async () => {
@@ -55,7 +62,11 @@ export default function AdminPhotos() {
     }
   };
 
+<<<<<<< HEAD
   if (!isStaff(me?.role)) {
+=======
+  if (me?.role !== "Admin") {
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
     return (
       <main>
         <h1>Admin</h1>

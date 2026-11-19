@@ -1,7 +1,10 @@
 import { useCallback, useEffect, useState, type FormEvent } from "react";
 import { Link, useLocation, useParams } from "react-router-dom";
 import { api, messageOf } from "../api/client";
+<<<<<<< HEAD
 import { isStaff } from "../api/types";
+=======
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
 import type { CaseDetail, CaseStatus, ProviderOnCase } from "../api/types";
 import { ACTION_LABEL, CATEGORY_LABEL, INCIDENT_LABEL, REVIEW_TAGS, STATUS_LABEL } from "../api/labels";
 import { useAuth } from "../auth";
@@ -108,7 +111,11 @@ export default function CasePage() {
             timeline={detail.timeline}
             comments={detail.comments}
             canPost={detail.canComment}
+<<<<<<< HEAD
             isAdmin={isStaff(me?.role)}
+=======
+            isAdmin={me?.role === "Admin"}
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
             onPosted={load}
           />
 

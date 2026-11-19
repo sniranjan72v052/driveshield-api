@@ -16,8 +16,12 @@ CREATE TABLE users (
     email         varchar(254),                          -- verified sign-in email, lower case
     login_phone   varchar(20),                           -- verified sign-in mobile number, E.164 (+919876543210)
     role          varchar(20)  NOT NULL DEFAULT 'Customer'
+<<<<<<< HEAD
                   CHECK (role IN ('Customer', 'Provider', 'Admin', 'SuperAdmin')),
     admin_granted boolean      NOT NULL DEFAULT false,   -- made an admin inside the app by a super admin
+=======
+                  CHECK (role IN ('Customer', 'Provider', 'Admin')),
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
     created_at    timestamptz  NOT NULL DEFAULT now()
 );
 -- each email or number belongs to at most one account
@@ -30,6 +34,7 @@ CREATE TABLE provider_profiles (
     user_id               uuid NOT NULL UNIQUE REFERENCES users(id) ON DELETE CASCADE,
     business_name         text NOT NULL,
     description           text,
+<<<<<<< HEAD
     license_number        text,                                  -- licence or GST number
     address               text,
     city                  text,
@@ -45,6 +50,9 @@ CREATE TABLE provider_profiles (
     paint_discount        numeric(5,2),
     paint_discount_oem    numeric(5,2),
     imd_code              text,
+=======
+    license_number        text,
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
     location              geography(Point, 4326),         -- last known / base location
     service_radius_meters integer NOT NULL DEFAULT 15000,
     is_available          boolean NOT NULL DEFAULT false,

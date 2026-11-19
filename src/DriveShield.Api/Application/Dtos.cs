@@ -22,6 +22,7 @@ public record RegisterProviderRequest(
     List<ServiceCategory> Categories,
     double Latitude,
     double Longitude,
+<<<<<<< HEAD
     int? ServiceRadiusMeters,
     ProviderDetails? Details = null);
 
@@ -42,6 +43,9 @@ public record ProviderDetails(
     decimal? PaintDiscount,
     decimal? PaintDiscountOem,
     string? ImdCode);
+=======
+    int? ServiceRadiusMeters);
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
 
 public record LocationRequest(double Latitude, double Longitude);
 public record AvailabilityRequest(bool IsAvailable);

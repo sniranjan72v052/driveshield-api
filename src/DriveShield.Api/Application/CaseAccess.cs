@@ -37,7 +37,11 @@ public record CaseAccess(bool IsAdmin, bool IsCustomer, Guid? ProviderId, bool H
         }
 
         return new CaseAccess(
+<<<<<<< HEAD
             IsAdmin: user.Role.IsStaff(),
+=======
+            IsAdmin: user.Role == UserRole.Admin,
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
             IsCustomer: c.CustomerId == user.Id,
             ProviderId: providerId,
             HasAnyOffer: anyOffer,

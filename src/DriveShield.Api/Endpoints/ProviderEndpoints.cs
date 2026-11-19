@@ -14,8 +14,11 @@ public static class ProviderEndpoints
 
         g.MapPost("/register", Register);
         g.MapGet("/me", MyProfile);
+<<<<<<< HEAD
         g.MapGet("/me/details", MyDetails);
         g.MapPut("/me/details", UpdateDetails);
+=======
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
         g.MapGet("/me/jobs", MyJobs);
         g.MapPut("/me/location", UpdateLocation);
         g.MapPut("/me/availability", UpdateAvailability);
@@ -42,18 +45,25 @@ public static class ProviderEndpoints
             UserId = user.Id,
             BusinessName = req.BusinessName.Trim(),
             Description = req.Description?.Trim(),
+<<<<<<< HEAD
+=======
+            LicenseNumber = req.LicenseNumber?.Trim(),
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
             Location = Geo.Point(req.Latitude, req.Longitude),
             ServiceRadiusMeters = Math.Clamp(req.ServiceRadiusMeters ?? 15_000, 1_000, 100_000),
             ApprovalStatus = ProviderApprovalStatus.Pending, // an admin must approve before offers are sent
             IsAvailable = false,
             Services = req.Categories.Distinct().Select(c => new ProviderService { Category = c }).ToList()
         };
+<<<<<<< HEAD
         var details = req.Details ?? new ProviderDetails(req.LicenseNumber, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
         if (string.IsNullOrWhiteSpace(details.LicenseNumber) && !string.IsNullOrWhiteSpace(req.LicenseNumber))
             details = details with { LicenseNumber = req.LicenseNumber };
         var detailsError = ProviderDetailsRules.Apply(profile, details);
         if (detailsError is not null) return Results.BadRequest(new { error = detailsError });
 
+=======
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
         db.ProviderProfiles.Add(profile);
 
         // The number customers call. If none is typed, use the mobile number they signed in with.
@@ -80,6 +90,7 @@ public static class ProviderEndpoints
             p.Location?.Y, p.Location?.X));
     }
 
+<<<<<<< HEAD
     private static ProviderDetails ToDetails(ProviderProfile p) => new(
         p.LicenseNumber, p.Address, p.City, p.State, p.PinCode, p.ManagerName, p.ManagerEmail, p.PanNumber,
         p.BankAccountNumber, p.IfscCode, p.TdsPercentage, p.Zone, p.PaintDiscount, p.PaintDiscountOem, p.ImdCode);
@@ -106,6 +117,8 @@ public static class ProviderEndpoints
         return Results.Ok(ToDetails(p));
     }
 
+=======
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
     /// <summary>Cases this provider has accepted, most recently updated first.</summary>
     private static async Task<IResult> MyJobs(HttpContext http, UserResolver users, AppDbContext db, CancellationToken ct)
     {

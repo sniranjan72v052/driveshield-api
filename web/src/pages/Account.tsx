@@ -90,7 +90,11 @@ export default function Account() {
     <main className="account">
       <h1>Your account</h1>
       <p className="muted">
+<<<<<<< HEAD
         Signed in as {me.email ?? me.loginPhone ?? "this device"}. Account type: {me.role === "SuperAdmin" ? "Super admin" : me.role === "Admin" ? "Admin" : me.role === "Provider" ? "Provider" : "Customer"}.
+=======
+        Signed in as {me.email ?? me.loginPhone ?? "this device"}. Account type: {me.role === "Admin" ? "Admin" : me.role === "Provider" ? "Provider" : "Customer"}.
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
       </p>
 
       <form onSubmit={saveName} className="stack">

@@ -1,12 +1,19 @@
 import { useCallback, useEffect, useState, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { api, ApiError, messageOf } from "../api/client";
+<<<<<<< HEAD
 import type { Job, Offer, ProviderDetails, ProviderProfile, ServiceCategory } from "../api/types";
+=======
+import type { Job, Offer, ProviderProfile, ServiceCategory } from "../api/types";
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
 import { ALL_CATEGORIES, CATEGORY_LABEL, INCIDENT_LABEL, STATUS_LABEL, formatKm, formatTime } from "../api/labels";
 import { useAuth } from "../auth";
 import { useProviderInbox } from "../hooks/useLive";
 import MapView, { getMyLocation, type LatLng } from "../components/MapView";
+<<<<<<< HEAD
 import ProviderDetailsFields, { emptyDetails, fromDetails, toDetails, type DetailsForm } from "../components/ProviderDetailsFields";
+=======
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
 
 export default function ProviderHome() {
   const { reloadMe } = useAuth();
@@ -69,7 +76,11 @@ function RegisterForm({ onDone }: { onDone: () => Promise<void> }) {
   // If they signed in with a mobile number, offer it as the number customers can call (they can change it).
   const { me } = useAuth();
   const [phone, setPhone] = useState(me?.loginPhone ?? "");
+<<<<<<< HEAD
   const [details, setDetails] = useState<DetailsForm>(emptyDetails);
+=======
+  const [licence, setLicence] = useState("");
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
   const [description, setDescription] = useState("");
   const [categories, setCategories] = useState<ServiceCategory[]>([]);
   const [radiusKm, setRadiusKm] = useState(15);
@@ -89,6 +100,7 @@ function RegisterForm({ onDone }: { onDone: () => Promise<void> }) {
     }
   };
 
+<<<<<<< HEAD
   // Typing a coordinate moves the pin once both numbers make sense.
   const setCoord = (which: "lat" | "lng", raw: string) => {
     const n = Number(raw);
@@ -98,6 +110,8 @@ function RegisterForm({ onDone }: { onDone: () => Promise<void> }) {
     setLocation(next);
   };
 
+=======
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
   const submit = async (e: FormEvent) => {
     e.preventDefault();
     if (!location || categories.length === 0) return;
@@ -107,7 +121,11 @@ function RegisterForm({ onDone }: { onDone: () => Promise<void> }) {
       await api.post("/api/providers/register", {
         businessName: businessName.trim(),
         description: description.trim() || null,
+<<<<<<< HEAD
         details: toDetails(details),
+=======
+        licenseNumber: licence.trim() || null,
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
         phone: phone.trim() || null,
         categories,
         latitude: location.lat,
@@ -132,12 +150,20 @@ function RegisterForm({ onDone }: { onDone: () => Promise<void> }) {
           <input id="biz" value={businessName} onChange={(e) => setBusinessName(e.target.value)} maxLength={200} required />
           <label htmlFor="phone">Phone number customers can call</label>
           <input id="phone" type="tel" value={phone} onChange={(e) => setPhone(e.target.value)} />
+<<<<<<< HEAD
+=======
+          <label htmlFor="lic">Licence or registration number (optional)</label>
+          <input id="lic" value={licence} onChange={(e) => setLicence(e.target.value)} />
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
           <label htmlFor="about">About your service (optional)</label>
           <textarea id="about" rows={3} value={description} onChange={(e) => setDescription(e.target.value)} />
         </div>
 
+<<<<<<< HEAD
         <ProviderDetailsFields value={details} onChange={setDetails} />
 
+=======
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
         <fieldset className="stack">
           <legend>Services you provide</legend>
           <div className="chips">
@@ -170,6 +196,7 @@ function RegisterForm({ onDone }: { onDone: () => Promise<void> }) {
             <span className="muted">Or tap the map to place the pin.</span>
           </div>
           <MapView value={location} onChange={setLocation} height={280} />
+<<<<<<< HEAD
           <div className="row wrap">
             <div>
               <label htmlFor="lat">Latitude</label>
@@ -192,6 +219,8 @@ function RegisterForm({ onDone }: { onDone: () => Promise<void> }) {
               />
             </div>
           </div>
+=======
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
         </section>
 
         {error && (
@@ -370,8 +399,11 @@ function Dashboard({ profile, reload }: { profile: ProviderProfile; reload: () =
         </>
       )}
 
+<<<<<<< HEAD
       <BusinessDetails />
 
+=======
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
       <section className="stack">
         <h2>Your base location</h2>
         <p className="muted">Requests are matched to you by distance from here. You can change it when you move.</p>
@@ -392,6 +424,7 @@ function Dashboard({ profile, reload }: { profile: ProviderProfile; reload: () =
   );
 }
 
+<<<<<<< HEAD
 /** The provider's own business details, editable after registering. */
 function BusinessDetails() {
   const [form, setForm] = useState<DetailsForm | null>(null);
@@ -451,6 +484,8 @@ function BusinessDetails() {
   );
 }
 
+=======
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
 function Countdown({ until }: { until: string }) {
   const [now, setNow] = useState(() => Date.now());
   useEffect(() => {

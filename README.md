@@ -281,6 +281,7 @@ It is a modular monolith, not microservices.
 
 ### "We couldn't send the code"
 The API log has the real cause (`SMTP send failed…` or `The SMS service answered with status …: <reason>`). Gmail needs 2-step verification plus an App password, `FromAddress` equal to the Gmail address, port 587. Twilio needs a From number (or Messaging Service SID); trial accounts only text verified numbers. For local testing use `Auth:Otp:Delivery=Console` with `ExposeDevCode=true`.
+<<<<<<< HEAD
 
 ## Super admin and admins
 
@@ -296,3 +297,5 @@ Providers can give these when they register, and update them later from **Provid
 - Existing databases: run `db/patches/005_provider_details.sql` once. New databases get the columns from `db/schema.sql`.
 - API: `GET` and `PUT /api/providers/me/details`; `POST /api/providers/register` accepts a `details` object.
 - PAN and bank account numbers are stored as typed. Before launch, consider encrypting them at rest (for example with ASP.NET Core Data Protection or Azure Key Vault) and limiting who can read them.
+=======
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3

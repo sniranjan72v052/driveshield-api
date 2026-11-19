@@ -103,6 +103,7 @@ public class AccountService(AppDbContext db, IOptions<AccountOptions> options, I
     {
         if (user.Email is null) return false;
 
+<<<<<<< HEAD
         static HashSet<string> Clean(IEnumerable<string> list) =>
             list.Select(e => e.Trim().ToLowerInvariant()).Where(e => e.Length > 0).ToHashSet();
 
@@ -128,6 +129,25 @@ public class AccountService(AppDbContext db, IOptions<AccountOptions> options, I
             var isProvider = await db.ProviderProfiles.AnyAsync(p => p.UserId == user.Id, ct);
             user.Role = isProvider ? UserRole.Provider : UserRole.Customer;
             log.LogInformation("{Email} is no longer an admin.", user.Email);
+=======
+        var admins = options.Value.AdminEmails
+            .Select(e => e.Trim().ToLowerInvariant())
+            .Where(e => e.Length > 0)
+            .ToHashSet();
+        var shouldBeAdmin = admins.Contains(user.Email);
+
+        if (shouldBeAdmin && user.Role != UserRole.Admin)
+        {
+            user.Role = UserRole.Admin;
+            log.LogInformation("{Email} is on Auth:AdminEmails, so this account is now an admin.", user.Email);
+            return true;
+        }
+        else if (!shouldBeAdmin && user.Role == UserRole.Admin && user.ExternalId.StartsWith("otp-", StringComparison.Ordinal))
+        {
+            var isProvider = await db.ProviderProfiles.AnyAsync(p => p.UserId == user.Id, ct);
+            user.Role = isProvider ? UserRole.Provider : UserRole.Customer;
+            log.LogInformation("{Email} is no longer on Auth:AdminEmails, so this account is no longer an admin.", user.Email);
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
             return true;
         }
         return false;

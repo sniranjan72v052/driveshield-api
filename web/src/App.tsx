@@ -19,8 +19,11 @@ import AdminRequests from "./pages/AdminRequests";
 import AdminRequest from "./pages/AdminRequest";
 import AdminCustomers from "./pages/AdminCustomers";
 import AdminProviders from "./pages/AdminProviders";
+<<<<<<< HEAD
 import { isStaff } from "./api/types";
 import AdminAdmins from "./pages/AdminAdmins";
+=======
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
 
 /** A header with just the logo, for the one-off screens shown before the app proper. */
 function Plain({ children }: { children: ReactNode }) {
@@ -153,7 +156,11 @@ function Shell() {
           <NavLink to="/" end>
             Home
           </NavLink>
+<<<<<<< HEAD
           {isStaff(me.role) ? (
+=======
+          {me.role === "Admin" ? (
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
             <NavLink to="/admin/requests">Admin</NavLink>
           ) : (
             <>
@@ -187,7 +194,10 @@ function Shell() {
         <Route path="/admin/requests/:id" element={<AdminRequest />} />
         <Route path="/admin/customers" element={<AdminCustomers />} />
         <Route path="/admin/providers" element={<AdminProviders />} />
+<<<<<<< HEAD
         <Route path="/admin/admins" element={<AdminAdmins />} />
+=======
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>

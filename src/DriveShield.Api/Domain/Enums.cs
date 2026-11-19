@@ -2,6 +2,7 @@ using System.Text.RegularExpressions;
 
 namespace DriveShield.Api.Domain;
 
+<<<<<<< HEAD
 public enum UserRole { Customer, Provider, Admin, SuperAdmin }
 
 public static class UserRoleExtensions
@@ -9,6 +10,9 @@ public static class UserRoleExtensions
     /// <summary>Admins and super admins both run the service. Only super admins manage the admin list.</summary>
     public static bool IsStaff(this UserRole role) => role is UserRole.Admin or UserRole.SuperAdmin;
 }
+=======
+public enum UserRole { Customer, Provider, Admin }
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
 
 /// <summary>The four incident types from the flow diagram.</summary>
 public enum IncidentType { Accident, Breakdown, NaturalCalamity, WrongParking }

@@ -48,12 +48,15 @@ public class AccountOptions
     /// take admin rights away at that person's next sign-in.
     /// </summary>
     public List<string> AdminEmails { get; set; } = [];
+<<<<<<< HEAD
 
     /// <summary>
     /// Signing in with one of these (verified) emails makes the account a super admin: an admin who can also add and
     /// remove other admins. Only changeable here, never from inside the app.
     /// </summary>
     public List<string> SuperAdminEmails { get; set; } = [];
+=======
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
 }
 
 /// <summary>Email:Smtp in appsettings. Works with any SMTP service (Azure Communication Services, SendGrid, Amazon SES, Gmail app password...).</summary>

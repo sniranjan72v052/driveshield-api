@@ -21,6 +21,11 @@ var builder = WebApplication.CreateBuilder(args);
 // the project files cannot reset it. It is read last, so it wins over appsettings.json and appsettings.Development.json.
 builder.Configuration.AddJsonFile("appsettings.Production.json", optional: true, reloadOnChange: true);
 var config = builder.Configuration;
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
 var isDevelopment = builder.Environment.IsDevelopment();
 
 // ---------------------------------------------------------------- database (PostgreSQL + PostGIS)
@@ -102,6 +107,7 @@ if (!isDevelopment && jwt.SigningKey.StartsWith("dev-only", StringComparison.Ord
 // Everyone signs in with a code and then sends the access token we issue as "Authorization: Bearer ...".
 // In Development only, the header "X-Dev-User: name" (or ?dev_user=name) also works, for curl and quick tests.
 const string DevOrBearer = "DevOrBearer";
+<<<<<<< HEAD
 var auth = builder.Services.AddAuthentication(o =>
 {
     var scheme = isDevelopment ? DevOrBearer : JwtBearerDefaults.AuthenticationScheme;
@@ -109,6 +115,16 @@ var auth = builder.Services.AddAuthentication(o =>
     o.DefaultAuthenticateScheme = scheme;
     o.DefaultChallengeScheme = scheme;
 })
+=======
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//var auth = builder.Services.AddAuthentication(o =>
+//{
+//    var scheme = isDevelopment ? DevOrBearer : JwtBearerDefaults.AuthenticationScheme;
+//    o.DefaultScheme = scheme;
+//    o.DefaultAuthenticateScheme = scheme;
+//    o.DefaultChallengeScheme = scheme;
+//})
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
 .AddJwtBearer(o =>
 {
     o.MapInboundClaims = false; // keep raw claim names: "sub", "name"
@@ -150,6 +166,7 @@ var auth = builder.Services.AddAuthentication(o =>
     };
 });
 
+<<<<<<< HEAD
 if (isDevelopment)
 {
     auth.AddScheme<AuthenticationSchemeOptions, DevAuthHandler>(DevAuthHandler.Scheme, null);
@@ -161,6 +178,19 @@ if (isDevelopment)
                 : JwtBearerDefaults.AuthenticationScheme;
     });
 }
+=======
+//if (isDevelopment)
+//{
+//    auth.AddScheme<AuthenticationSchemeOptions, DevAuthHandler>(DevAuthHandler.Scheme, null);
+//    auth.AddPolicyScheme(DevOrBearer, "Dev header or bearer token", o =>
+//    {
+//        o.ForwardDefaultSelector = ctx =>
+//            ctx.Request.Headers.ContainsKey("X-Dev-User") || ctx.Request.Query.ContainsKey("dev_user")
+//                ? DevAuthHandler.Scheme
+//                : JwtBearerDefaults.AuthenticationScheme;
+//    });
+//}
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
 builder.Services.AddAuthorization();
 
 // Slows down guessing and abuse on the sign-in routes. The limits per email/number and per code live in OtpService.
@@ -189,7 +219,11 @@ var fwd = new ForwardedHeadersOptions { ForwardedHeaders = Microsoft.AspNetCore.
 fwd.KnownNetworks.Clear();
 fwd.KnownProxies.Clear();
 app.UseForwardedHeaders(fwd);
+<<<<<<< HEAD
 if (!app.Environment.IsDevelopment())
+=======
+if (!isDevelopment)
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
 {
     app.UseHsts();
     app.UseHttpsRedirection();
@@ -202,12 +236,20 @@ app.Use(async (ctx, next) =>
     catch (UnauthorizedAccessException) when (!ctx.Response.HasStarted) { ctx.Response.StatusCode = StatusCodes.Status401Unauthorized; }
 });
 
+<<<<<<< HEAD
+=======
+app.UseExceptionHandler(a => a.Run(c => { c.Response.StatusCode = 500; return c.Response.WriteAsJsonAsync(new { error = "Server error" }); }));
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
 app.UseCors();
 app.UseRateLimiter();
 app.UseAuthentication();
 app.UseAuthorization();
 
+<<<<<<< HEAD
 if (!app.Environment.IsDevelopment())
+=======
+if (!isDevelopment)
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
 {
     app.MapOpenApi();
     // Swagger UI at /swagger. Development only: production exposes neither this page nor the API description.
@@ -217,7 +259,11 @@ if (!app.Environment.IsDevelopment())
         o.RoutePrefix = "swagger";
         o.EnablePersistAuthorization(); // keeps the pasted token when the page is reloaded
     });
+<<<<<<< HEAD
     await DevSetup.InitializeAsync(app.Services, config);
+=======
+    //await DevSetup.InitializeAsync(app.Services, config);
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
 }
 
 app.MapGet("/healthz", () => Results.Ok(new { status = "ok" }));

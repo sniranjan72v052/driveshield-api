@@ -1,6 +1,9 @@
 import { useCallback, useEffect, useState } from "react";
 import { api, messageOf } from "../api/client";
+<<<<<<< HEAD
 import { isStaff } from "../api/types";
+=======
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
 import type { PendingProvider } from "../api/types";
 import { CATEGORY_LABEL, formatTime } from "../api/labels";
 import { useAuth } from "../auth";
@@ -21,7 +24,11 @@ export default function Admin() {
   }, []);
 
   useEffect(() => {
+<<<<<<< HEAD
     if (isStaff(me?.role)) void load();
+=======
+    if (me?.role === "Admin") void load();
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
   }, [me?.role, load]);
 
   const decide = async (p: PendingProvider, action: "approve" | "reject") => {
@@ -33,7 +40,11 @@ export default function Admin() {
     }
   };
 
+<<<<<<< HEAD
   if (!isStaff(me?.role)) {
+=======
+  if (me?.role !== "Admin") {
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
     return (
       <main>
         <h1>Admin</h1>
@@ -66,6 +77,7 @@ export default function Admin() {
                 </div>
                 <div className="muted">
                   {p.phone ? `Phone ${p.phone}. ` : ""}
+<<<<<<< HEAD
                   {p.licenseNumber ? `Licence or GST ${p.licenseNumber}. ` : "No licence or GST number given. "}
                   Registered {formatTime(p.createdAt)}.
                 </div>
@@ -93,6 +105,11 @@ export default function Admin() {
                     {p.imdCode ? `IMD ${p.imdCode}.` : ""}
                   </div>
                 )}
+=======
+                  {p.licenseNumber ? `Licence ${p.licenseNumber}. ` : "No licence number given. "}
+                  Registered {formatTime(p.createdAt)}.
+                </div>
+>>>>>>> ea6e7ce160a55737ca5f595cc1b53b1aa83f75a3
               </div>
               <div className="row">
                 <button className="btn primary" onClick={() => void decide(p, "approve")}>

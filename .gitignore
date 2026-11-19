@@ -1,0 +1,11 @@
+bin/
+obj/
+.vs/
+.vscode/
+*.user
+appsettings.Production.json
+secrets.json
+node_modules/
+dist/
+App_Data/
+appsettings.Local.json

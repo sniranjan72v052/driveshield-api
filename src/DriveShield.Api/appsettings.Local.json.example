@@ -1,0 +1,6 @@
+{
+  "Auth": {
+    "SuperAdminEmails": [ "you@example.com" ],
+    "AdminEmails": [ ]
+  }
+}

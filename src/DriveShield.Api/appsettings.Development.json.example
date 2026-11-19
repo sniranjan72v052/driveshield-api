@@ -1,0 +1,24 @@
+{
+  "ConnectionStrings": {
+    "Default": "Host=localhost;Port=5432;Database=driveshield;Username=postgres;Password=postgres"
+  },
+  "Cors": {
+    "Origins": [ "http://localhost:5173", "http://localhost:3000" ]
+  },
+  "Database": {
+    "AutoCreate": true
+  },
+  "Matching": {
+    "OfferTtlSeconds": 120
+  },
+  "Auth": {
+    "AdminEmails": [ "replace-with-your-email@example.com" ],
+    "Jwt": {
+      "SigningKey": "dev-only-signing-key-never-use-this-in-production-0123456789"
+    },
+    "Otp": {
+      "Delivery": "Console",
+      "ExposeDevCode": true
+    }
+  }
+}
